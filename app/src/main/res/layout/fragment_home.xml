@@ -2,13 +2,136 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="首页"
-        android:textColor="@color/title_text"/>
+    <include layout="@layout/common_title"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </android.support.v4.view.ViewPager>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我是小圆圈"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center_horizontal|bottom"
+                    />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="硅谷堂180计划第一期"
+                android:textSize="30sp"
+                android:drawableRight="@drawable/recommend"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:drawablePadding="4dp"
+                android:textColor="@color/product_detail_common"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="本息保障"
+                    android:background="@drawable/home_attribute_bg"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="每日计息"
+                    android:background="@drawable/home_attribute_bg"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="高额收益"
+                    android:background="@drawable/home_attribute_bg"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"/>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="我是圆形进度条"
+                android:layout_marginTop="10dp"/>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预期年利率:"
+                    android:textSize="20sp"
+                    android:textColor="@color/product_detail_common"/>
+                <TextView
+                    android:id="@+id/iv_yhome_yearrate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10% + 2%"
+                    android:textSize="20sp"
+                    android:textColor="@color/product_detail_common"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/home"
+                android:text="立即加入"
+                android:textSize="30sp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="风险保障由硅谷银行监管"
+                android:drawableLeft="@drawable/guarantee_icon"
+                android:layout_gravity="bottom|center"
+                />
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

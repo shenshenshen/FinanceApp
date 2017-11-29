@@ -38,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:text="首页"
                 android:layout_marginTop="3dp"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textColor="@color/home_back_unselected"/>
         </LinearLayout>
 
         <LinearLayout
@@ -62,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:text="投资"
                 android:layout_marginTop="3dp"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textColor="@color/home_back_unselected"/>
         </LinearLayout>
 
         <LinearLayout
@@ -86,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:text="我的投资"
                 android:layout_marginTop="3dp"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textColor="@color/home_back_unselected"/>
         </LinearLayout>
 
         <LinearLayout
@@ -110,7 +113,8 @@
                 android:layout_height="wrap_content"
                 android:text="更多"
                 android:layout_marginTop="3dp"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textColor="@color/home_back_unselected"/>
         </LinearLayout>
 
 

@@ -2,10 +2,13 @@ package example.com.financeappapplication.activity;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -51,6 +54,7 @@ public class MainActivity extends FragmentActivity {
     LinearLayout llMainMore;
 
     FragmentTransaction transaction;
+    private static final int WHAT_RESET_BACK = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        setSelect(0);
     }
 
     @OnClick({R.id.ll_main_home,R.id.ll_main_invest,R.id.ll_main_me,R.id.ll_main_more})
@@ -83,6 +88,7 @@ public class MainActivity extends FragmentActivity {
     private InvestFragment investFragment;
     private MeFragment meFragment;
     private MoreFragment moreFragment;
+
     //提供相应的fragment的显示
     private void setSelect(int i) {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
@@ -90,6 +96,9 @@ public class MainActivity extends FragmentActivity {
 
         //隐藏所有Fragment的显示
         hideFragments();
+
+        //重置Tab
+        resetTab();
 
         switch (i){
             case 0:
@@ -141,6 +150,20 @@ public class MainActivity extends FragmentActivity {
         transaction.commit();//提交事务
     }
 
+    //重置选项
+    private void resetTab() {
+        ivMainHome.setImageResource(R.drawable.bottom01);
+        ivMainInvest.setImageResource(R.drawable.bottom03);
+        ivMainMe.setImageResource(R.drawable.bottom05);
+        ivMainMore.setImageResource(R.drawable.bottom07);
+
+        tvMainHome.setTextColor(getResources().getColor(R.color.home_back_unselected));
+        tvMainInvest.setTextColor(getResources().getColor(R.color.home_back_unselected));
+        tvMainMe.setTextColor(getResources().getColor(R.color.home_back_unselected));
+        tvMainMore.setTextColor(getResources().getColor(R.color.home_back_unselected));
+    }
+
+    //隐藏Fragments
     private void hideFragments() {
         if (homeFragment != null){
             transaction.hide(homeFragment);
@@ -156,4 +179,34 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    //重写onKeyUp(),实现连续两次点击方法可推出当前应用
+    private boolean flag = true;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case WHAT_RESET_BACK :
+                    flag = true;//复原
+                    break;
+            }
+        }
+    };
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && flag) {
+            Toast.makeText(MainActivity.this,"如果再点击一次，退出当前应用",Toast.LENGTH_SHORT).show();
+            flag = false;
+            //发送延迟消息
+            handler.sendEmptyMessageDelayed(WHAT_RESET_BACK,2000);
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeMessages(WHAT_RESET_BACK);//指定id的所有的消息
+    }
 }
