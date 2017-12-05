@@ -31,4 +31,5 @@ dependencies {
     implementation files('libs/android-async-http-master.jar')
     compile 'com.google.code.gson:gson:2.8.2'
     implementation files('libs/fastjson-1.2.4.jar')
+    implementation files('libs/picasso-2.5.2.jar')
 }

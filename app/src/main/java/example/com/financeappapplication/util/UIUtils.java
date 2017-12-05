@@ -49,4 +49,16 @@ public class UIUtils {
         return (int) (px / density + 0.5);//实现四舍五入
     }
 
+
+    public static void runOnUiThread(Runnable runnable) {
+        if (isRunMainThread()){
+            runnable.run();
+        }else{
+            UIUtils.getHandler().post(runnable);
+        }
+    }
+    private static boolean isRunMainThread() {
+        int currentThreadID = android.os.Process.myTid();
+        return MyApplication.mainThreadId == currentThreadID;
+    }
 }

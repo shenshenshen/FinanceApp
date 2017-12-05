@@ -38,6 +38,7 @@
             </FrameLayout>
 
             <TextView
+                android:id="@+id/tv_home_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="硅谷堂180计划第一期"
@@ -62,7 +63,8 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/product_detail_common"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -72,7 +74,8 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/product_detail_common"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -82,8 +85,8 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"/>
-
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/product_detail_common"/>
             </LinearLayout>
 
             <Button
@@ -103,7 +106,7 @@
                     android:textSize="20sp"
                     android:textColor="@color/product_detail_common"/>
                 <TextView
-                    android:id="@+id/iv_yhome_yearrate"
+                    android:id="@+id/tv_yhome_yearrate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10% + 2%"
@@ -129,6 +132,7 @@
                 android:text="风险保障由硅谷银行监管"
                 android:drawableLeft="@drawable/guarantee_icon"
                 android:layout_gravity="bottom|center"
+                android:textColor="@color/product_detail_common"
                 />
         </LinearLayout>
 

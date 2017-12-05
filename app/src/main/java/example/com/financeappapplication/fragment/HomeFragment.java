@@ -1,19 +1,18 @@
 package example.com.financeappapplication.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -23,13 +22,15 @@ import butterknife.Unbinder;
 import example.com.financeappapplication.R;
 import example.com.financeappapplication.bean.Image;
 import example.com.financeappapplication.common.AppNetConfig;
-import example.com.financeappapplication.util.UIUtils;
+import example.com.financeappapplication.common.BaseFragment;
+import example.com.financeappapplication.util.LogUtil;
 
 /**
  * Created by Administrator on 2017/11/28.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
+
 
     @BindView(R.id.iv_title_back)
     ImageView ivTitleBack;
@@ -37,63 +38,91 @@ public class HomeFragment extends Fragment {
     TextView tvTitle;
     @BindView(R.id.iv_title_setting)
     ImageView ivTitleSetting;
-    Unbinder unbinder;
+    @BindView(R.id.vp_home)
+    ViewPager vpHome;
+    @BindView(R.id.tv_home_product)
+    TextView tvHomeProduct;
+    @BindView(R.id.tv_yhome_yearrate)
+    TextView tvYhomeYearrate;
 
-    @Nullable
+    private Image.ProInfoBean product;
+    private List<Image.ImageArrBean> images;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fragment_home, null);
-        unbinder = ButterKnife.bind(this, view);
-
-        //初始化Title
-        initTitle();
-        
-        //初始化数据
-        initData();
-
-        return view;
+    protected String getUrl() {
+        return AppNetConfig.INDEX;
     }
 
-    //初始化数据
-    private void initData() {
-        AsyncHttpClient client = new AsyncHttpClient();
-
-        client.post(AppNetConfig.INDEX,new AsyncHttpResponseHandler(){
-            @Override
-            public void onSuccess(String content) {//响应成功
-                //解析json数据 : Gson /Fast-json
-                JSONObject jsonObject = JSON.parseObject(content);
-
-                //解析json对象数据
-                String proinfor = jsonObject.getString("proInfo");
-                //解析json数组数据
-                Image.ProInfoBean product = JSON.parseObject(proinfor, Image.ProInfoBean.class);
-
-                //解析json数组
-                String ImageArr = jsonObject.getString("imageArr");
-                List<Image.ImageArrBean> images =  JSON.parseArray(ImageArr, Image.ImageArrBean.class);
-
-            }
-
-            @Override
-            public void onFailure(Throwable error, String content) {//响应失败
-                Toast.makeText(UIUtils.getContext(),"联网获取数据失败",Toast.LENGTH_SHORT).show();
-            }
-        });
+    @Override
+    protected RequestParams getParams() {
+        return null;
     }
 
-    //初始化Title
-    private void initTitle() {
+    @Override
+    protected void iniTitle() {
+        LogUtil.e("HomeFragment被初始化了");
+        tvTitle.setText("首页");
         ivTitleBack.setVisibility(View.GONE);
         ivTitleSetting.setVisibility(View.GONE);
-        tvTitle.setText("首页");
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    protected void iniData(String content) {
+        LogUtil.e("HomeFragment联网请求成功");
+        JSONObject jsonObject = JSON.parseObject(content);
+        
+        //解析json对象数据
+        String proinifor = jsonObject.getString("proInfo");
+        product = JSON.parseObject(proinifor,Image.ProInfoBean.class);
+
+        String imageArr = jsonObject.getString("imageArr");
+        images = JSON.parseArray(imageArr,Image.ImageArrBean.class);
+
+        tvHomeProduct.setText(product.getName());
+        tvYhomeYearrate.setText(product.getYearRate());
+
+        vpHome.setAdapter(new MyPagerAdapter());
+
     }
+
+    @Override
+    protected int getLayoutId() {
+
+        return R.layout.fragment_home;
+    }
+
+    class MyPagerAdapter extends PagerAdapter{
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            ImageView imageView = new ImageView(container.getContext());
+
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+            Picasso.with(getActivity()).load(AppNetConfig.BASE_URL + images.get(position).getIMAURL()).into(imageView);
+            container.addView(imageView);
+
+            return imageView;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+
+        @Override
+        public int getCount() {
+            List<Image.ImageArrBean> imagess = images;
+            return imagess == null ? 0 : imagess.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+    }
+
+
 }
 
 

@@ -38,6 +38,7 @@ public class WelcomeActivity extends Activity {
     }
 
     private Handler handler = new Handler();
+    //启动动画
     private void setAnimation() {
         AlphaAnimation alphaAnimation = new AlphaAnimation(0,1);//0:完全透明 1:完全不透明
         alphaAnimation.setDuration(3000);

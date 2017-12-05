@@ -23,6 +23,7 @@ import example.com.financeappapplication.fragment.HomeFragment;
 import example.com.financeappapplication.fragment.InvestFragment;
 import example.com.financeappapplication.fragment.MeFragment;
 import example.com.financeappapplication.fragment.MoreFragment;
+import example.com.financeappapplication.util.UIUtils;
 
 public class MainActivity extends FragmentActivity {
 
@@ -111,7 +112,7 @@ public class MainActivity extends FragmentActivity {
 
                 //改变选中项的图片和文本颜色的变化
                 ivMainHome.setImageResource(R.drawable.bottom02);
-                tvMainHome.setTextColor(getResources().getColor(R.color.home_back_selected));
+                tvMainHome.setTextColor(UIUtils.getColor(R.color.home_back_selected));
                 break;
             case 1:
                 if (investFragment == null){
@@ -122,7 +123,7 @@ public class MainActivity extends FragmentActivity {
 
                 //改变选中项的图片和文本颜色的变化
                 ivMainInvest.setImageResource(R.drawable.bottom04);
-                tvMainInvest.setTextColor(getResources().getColor(R.color.home_back_selected));
+                tvMainInvest.setTextColor(UIUtils.getColor(R.color.home_back_selected));
                 break;
             case 2:
                 if (meFragment == null){
@@ -133,7 +134,7 @@ public class MainActivity extends FragmentActivity {
 
                 //改变选中项的图片和文本颜色的变化
                 ivMainMe.setImageResource(R.drawable.bottom06);
-                tvMainMe.setTextColor(getResources().getColor(R.color.home_back_selected01));
+                tvMainMe.setTextColor(UIUtils.getColor(R.color.home_back_selected01));
                 break;
             case 3:
                 if (moreFragment == null){
@@ -144,7 +145,7 @@ public class MainActivity extends FragmentActivity {
 
                 //改变选中项的图片和文本颜色的变化
                 ivMainMore.setImageResource(R.drawable.bottom08);
-                tvMainMore.setTextColor(getResources().getColor(R.color.home_back_selected));
+                tvMainMore.setTextColor(UIUtils.getColor(R.color.home_back_selected));
                 break;
         }
         transaction.commit();//提交事务
@@ -157,10 +158,10 @@ public class MainActivity extends FragmentActivity {
         ivMainMe.setImageResource(R.drawable.bottom05);
         ivMainMore.setImageResource(R.drawable.bottom07);
 
-        tvMainHome.setTextColor(getResources().getColor(R.color.home_back_unselected));
-        tvMainInvest.setTextColor(getResources().getColor(R.color.home_back_unselected));
-        tvMainMe.setTextColor(getResources().getColor(R.color.home_back_unselected));
-        tvMainMore.setTextColor(getResources().getColor(R.color.home_back_unselected));
+        tvMainHome.setTextColor(UIUtils.getColor(R.color.home_back_unselected));
+        tvMainInvest.setTextColor(UIUtils.getColor(R.color.home_back_unselected));
+        tvMainMe.setTextColor(UIUtils.getColor(R.color.home_back_unselected));
+        tvMainMore.setTextColor(UIUtils.getColor(R.color.home_back_unselected));
     }
 
     //隐藏Fragments

@@ -6,9 +6,9 @@ package example.com.financeappapplication.common;
  */
 public class AppNetConfig {
 
-    public static final String IPADDRESS = "182.92.5.3";
+    public static final String IPADDRESS = "47.93.118.241";
 
-    public static final String BASE_URL = "http://" + IPADDRESS + ":8080/P2PInvest/";
+    public static final String BASE_URL = "http://" + IPADDRESS + ":8081/P2PInvest/";
 
     public static final String PRODUCT = BASE_URL + "product";//访问“全部理财”产品
 
